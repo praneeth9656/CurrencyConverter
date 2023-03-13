@@ -1,0 +1,13 @@
+const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'b904c79882mshf5fec6fcd82cdb5p122901jsn202a5a447f1a',
+      'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
+    }
+  };
+  
+  fetch(`https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency?have=${currencyfrom}&want=${currencyto}&amount=${amount}`, options)
+    .then(response => response.json())
+    .then(response => setconamount(response.new_amount))
+    
+    .catch(err => console.error(err));
