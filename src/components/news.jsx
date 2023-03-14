@@ -24,7 +24,7 @@ function News()
       }, []);
     return(
         <div className="news">
-        <h1>NEWS FEED</h1>
+        <h1>News feed</h1>
             
         {news.map((items,index)=> <a href={items.url} key={index}>{items.title}</a>)}
      </div>

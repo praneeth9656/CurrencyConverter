@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 
 function Currency() 
 {
-  const [from, Setfrom] = useState("");
-  const [to, Setto] = useState("");
+  const [from, Setfrom] = useState("USD");
+  const [to, Setto] = useState("USD");
   const [countries, SetCountries] = useState([]);
   const [currency ,SetCurrency]=useState("");
+  const [finalCurrency , SetFinalCurrency]=useState("");
   
   function FromCurrency(e) {
     Setfrom(e.target.value);
@@ -62,27 +63,27 @@ function Currency()
   function ConvertCurrency()
   {
     const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '2208856513msh56ce79f89afbac4p14e3a4jsn695ba9110bee',
-            'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
-        }
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': '2208856513msh56ce79f89afbac4p14e3a4jsn695ba9110bee',
+        'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
+      }
     };
     
     fetch(`https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency?have=${from}&want=${to}&amount=${currency}`, options)
         .then(response => response.json())
-        .then(data => SetCurrency(data.new_amount))
+        .then(data => SetFinalCurrency(data.new_amount))
         .catch(err => console.error(err));
   }
 
   return (
     
     <div className="currencyDashboard" >
-    <h1>Currency Converter</h1>
+    <h1>FOREX App</h1>
     <div className="currencyConverter">
     
     <div className="from">
-    <p>From</p>
+    
       <input
         type="text"
         name="from"
@@ -96,7 +97,7 @@ function Currency()
       </select>
     </div>
     <div className="to">
-    <p>to</p>
+    
       <input type="text" name="from" onChange={ToCurrency} value={to} />
       
       <select onChange={SelectedtoCurrency}>
@@ -105,13 +106,14 @@ function Currency()
       ))}
       </select>
     </div>
+    <h3>Amount</h3>
     <input id="currencyinput" type="text" onChange={Currency} value={currency} /><br />
       <button className="convert" onClick={ConvertCurrency}>Convert</button>
     </div>
       <div className="convertedcurrency">
-      <h1>Exchange Rate</h1>
-      <h1>{currency}</h1>
-      <h1>{from} to {to}</h1>
+      <h2>{finalCurrency}</h2>
+      <h2>{to}</h2>
+      
       </div>
      
 
